@@ -206,7 +206,7 @@ class setup_2(QWidget):
     def auto_java(self):
         self.show_java.setText("Java环境：[未选择]")
         self.choose_java.setEnabled(False)
-        java_ver = os.popen("java --version")
+        java_ver = os.popen("java -version")
         # print(str(java_ver.read()))
         java_output = java_ver.read()
         if "java" in str(java_output):
