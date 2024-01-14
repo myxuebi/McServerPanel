@@ -1,6 +1,7 @@
 import json
 import os
 import shutil
+import subprocess
 import sys
 import time
 
@@ -193,7 +194,9 @@ class setup_2(QWidget):
     def choose_java_file(self):
         java_path = QFileDialog.getOpenFileName(self,"选择Java主程序","C:","可执行文件 (*.exe)")
         if java_path[0]:
-            java_ver = os.popen(f""""{java_path[0]}" -version""").read()
+            # java_ver = os.popen(f""""{java_path[0]}" --version""").read()
+            java_ver = subprocess.check_output([f"{java_path[0]}", "-version"], stderr=subprocess.STDOUT, text=True,
+                                                  creationflags=subprocess.CREATE_NO_WINDOW)
             if "java" in str(java_ver):
                 self.show_java.setText(f"Java环境：{java_ver}\nJava路径：{java_path[0]}")
             else:
@@ -206,9 +209,11 @@ class setup_2(QWidget):
     def auto_java(self):
         self.show_java.setText("Java环境：[未选择]")
         self.choose_java.setEnabled(False)
-        java_ver = os.popen("java -version")
-        # print(str(java_ver.read()))
-        java_output = java_ver.read()
+        # java_ver = os.popen("java -version")
+        # # print(str(java_ver.read()))
+        # java_output = java_ver.read()
+        java_output = subprocess.check_output(["java", "-version"], stderr=subprocess.STDOUT, text=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        # print(java_output)
         if "java" in str(java_output):
             self.show_java.setText(f"Java环境：{java_output}")
         else:
