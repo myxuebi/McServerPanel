@@ -1,0 +1,4 @@
+原版服务端:https://mcversions.net/
+spigot插件服:https://getbukkit.org/download/spigot
+paper插件服:https://papermc.io/
+forgemod服:https://files.minecraftforge.net/net/minecraftforge/forge/
